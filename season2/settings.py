@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #my apps
-    'main_app.apps.MainAppConfig'
+    'main_app.apps.MainAppConfig',
     'account_app.apps.AccountAppConfig'
 ]
 
