@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "account_app/css/user_info.css" %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="main_div">
+            <div class="pic">
+                <img src="{% static "account_app/images/png-transparent-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-symbol-thumbnail.png" %}" alt="" class="main_img">
+            </div>
+            <div class="info">
+                <div class="username">
+                    <p>username : {{ request.user.username }}</p>
+                </div>
+                <div class="first_name">
+                    <p>first_name : {{ request.user.first_name }}</p>
+                </div>
+                <div class="last_name">
+                    <p>last_name : {{ request.user.last_name }}</p>
+                </div>
+                <div class="email">
+                    <p>email : {{ request.user.email }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
