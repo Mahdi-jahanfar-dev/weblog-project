@@ -10,9 +10,15 @@
 <body>
     <div class="container">
         <div class="main_div">
-            <div class="pic">
-                <img src="{% static "account_app/images/png-transparent-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-symbol-thumbnail.png" %}" alt="" class="main_img">
-            </div>
+            {% if user.profile.image %}
+                <div class="pic">
+                    <img src="{{ user.profile.image.url }}" alt="" class="main_img">
+                </div>
+            {% else %}
+                <div class="pic">
+                    <img src="{% static "account_app/images/png-transparent-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-symbol-thumbnail.png" %}" alt="" class="main_img">
+                </div>
+            {% endif %}
             <div class="info">
                 <div class="username">
                     <p>username : {{ request.user.username }}</p>
@@ -29,7 +35,10 @@
             </div>
             <div class="mm">
                 <div>
-                    <a href="/logout" class="linkk">logout</a>
+                    <a href="{% url 'account_app:edit_profile' %}" class="linkk">edit informations</a>
+                </div>
+                <div>
+                    <a href="{% url 'account_app:logout' %}" class="linkk">logout</a>
                 </div>
             </div>
         </div>

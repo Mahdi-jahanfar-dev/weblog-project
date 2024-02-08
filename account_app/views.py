@@ -2,6 +2,7 @@ from django.shortcuts import render , redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .models import Profile
 def login_user(request):
     if request.user.is_authenticated == True :
         return redirect('/')
@@ -11,9 +12,9 @@ def login_user(request):
         user= authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/')
+            return redirect('main_app:index')
         else:
-            return redirect('/login')
+            return redirect('account_app:login')
     else:
         return render(request,'account_app/login.html', {})
 
@@ -21,17 +22,17 @@ def user_account(request):
     if request.user.is_authenticated == True :
         return render(request,'account_app/user_informations.html', {})
     else:
-        return redirect('/')
+        return redirect('main_app:index')
 
 def user_logout(request):
     if request.user.is_authenticated == True :
         logout(request)
-        return redirect('/')
+        return redirect('main_app:index')
 
 def register(request):
     context = {"errors":[]}
     if request.user.is_authenticated == True :
-        return redirect('/')
+        return redirect('main_app:index')
     if request.method == "POST":
         user_name = request.POST["user_name"]
         password1 = request.POST["password1"]
@@ -54,6 +55,18 @@ def register(request):
             user = User.objects.create_user(username=user_name, password=password1, email=email)
             user.save()
             login(request, user)
-            return redirect('/')
+            return redirect('main_app:index')
     else:
         return render(request, 'account_app/register.html')
+
+def edit_profile(request):
+    if User.is_authenticated:
+        if request.method == 'POST':
+            father_name = request.POST["father_name"]
+            melicode = request.POST["meli_code"]
+            image = request.POST["image"]
+
+            Profile.objects.create(user_id=1,father_name=father_name, national_code=melicode, image=image)
+            return redirect('account_app:account')
+        else:
+            return render(request, 'account_app/edit_profile.html')
