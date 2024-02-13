@@ -1,54 +1,54 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-    home
-{% endblock %}
-
 {% block content %}
-    <div class="main-banner header-text">
-        <div class="container-fluid">
-            <div class="owl-banner owl-carousel">
-                {% include 'main_app/django_head_article_templates.html' %}
+
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="heading-page header-text">
+        <section class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-content">
+                            <h4>Recent Posts</h4>
+                            <h2>Our Recent Blog Entries</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </div>
+
     <!-- Banner Ends Here -->
-    <section class="blog-posts">
+    <section class="blog-posts grid-system">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="all-blog-posts">
                         <div class="row">
-                            {% for item in recent_articles %}
-                                <div class="col-lg-12">
+                            {% for item in articles %}
+                                <div class="col-lg-6">
                                     <div class="blog-post">
                                         <div class="blog-thumb">
-                                            <img src="{{ item.image.url }}" alt="">
+                                            <img src="{{ item.image.url }}" alt="post_image">
                                         </div>
                                         <div class="down-content">
-                                            <span>Lifestyle</span>
+                                            <span>{{ item.category.first }}</span>
                                             <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }}</h4></a>
                                             <ul class="post-info">
                                                 <li><a href="#">{{ item.writer }}</a></li>
                                                 <li><a href="#">{{ item.pub_date }}</a></li>
                                                 <li><a href="#">12 Comments</a></li>
                                             </ul>
-                                            <p>{{ item.content }}</p>
+                                            <p>{{ item.content|slice:"100" }}</p>
                                             <div class="post-options">
                                                 <div class="row">
-                                                    <div class="col-6">
+                                                    <div class="col-lg-12">
                                                         <ul class="post-tags">
                                                             <li><i class="fa fa-tags"></i></li>
                                                             <li><a href="#">{{ item.category.first }}</a>,</li>
                                                             <li><a href="#">{{ item.category.last }}</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <ul class="post-share">
-                                                            <li><i class="fa fa-share-alt"></i></li>
-                                                            <li><a href="#">Facebook</a>,</li>
-                                                            <li><a href="#"> Twitter</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -58,9 +58,12 @@
                                 </div>
                             {% endfor %}
                             <div class="col-lg-12">
-                                <div class="main-button">
-                                    <a href="{% url 'blog_app:article_list' %}">View All Posts</a>
-                                </div>
+                                <ul class="page-numbers">
+                                    <li><a href="#">1</a></li>
+                                    <li class="active"><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -83,12 +86,14 @@
                                     </div>
                                     <div class="content">
                                         <ul>
-                                            {% for item in recent_articles %}
-                                                <li><a href="post-details.html">
-                                                    <h5>{{ item.title }}</h5>
-                                                    <span>{{ item.pub_date }}</span>
-                                                </a></li>
-                                            {% endfor %}
+                                            <ul>
+                                                {% for item in recent_articles %}
+                                                    <li><a href="post-details.html">
+                                                        <h5>{{ item.title }}</h5>
+                                                        <span>{{ item.pub_date }}</span>
+                                                    </a></li>
+                                                {% endfor %}
+                                            </ul>
                                         </ul>
                                     </div>
                                 </div>

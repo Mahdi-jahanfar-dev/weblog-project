@@ -8,10 +8,10 @@
                 <div class="meta-category">
                     <span>{{ i.category.all.first.name }}</span>
                 </div>
-                <a href="post-details.html"><h4>{{ i.Title }}</h4></a>
+                    <a href="{{ i.get_absolute_url }}"><h4>{{ i.title }}</h4></a>
                 <ul class="post-info">
                     <li><a href="#">{{ i.writer.username }}</a></li>
-                    <li><a href="#">{{ i.Upload_date }}</a></li>
+                    <li><a href="#">{{ i.pub_date }}</a></li>
                     <li><a href="#">12 Comments</a></li>
                 </ul>
             </div>
