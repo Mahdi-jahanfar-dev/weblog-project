@@ -6,10 +6,10 @@ from .models import Article
 def article_details(request, slug):
     articles = get_object_or_404(Article, slug=slug)
     recent_articles = Article.objects.all().order_by('-pub_date')[:3]
-    return render(request,'blog_app/post-details.html', {"articles": articles, 'recent_articles': recent_articles})
+    return render(request,'blog_app/post-details.html', {"articles": articles})
 
 
 def all_articles(request):
     articles = Article.objects.all()
     recent_articles = Article.objects.all().order_by('-pub_date')[:3]
-    return render(request, 'blog_app/blog.html', {'articles': articles, 'recent_articles': recent_articles})
+    return render(request, 'blog_app/blog.html', {'articles': articles})

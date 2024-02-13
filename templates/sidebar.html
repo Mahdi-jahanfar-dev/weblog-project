@@ -1,0 +1,10 @@
+<div class="content">
+    <ul>
+        {% for item in recent_art %}
+            <li><a href="{{ item.get_absolute_url }}">
+                <h5>{{ item.title }}</h5>
+                <span>{{ item.pub_date }}</span>
+            </a></li>
+        {% endfor %}
+    </ul>
+</div>

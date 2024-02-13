@@ -37,8 +37,8 @@
                                         <img src="{{ articles.image.url }}" alt="faild">
                                     </div>
                                     <div class="down-content">
-                                        <span>{{ articles.title }}</span>
-                                        <a href="post-details.html"><h4>Aenean pulvinar gravida sem nec</h4></a>
+                                        <span>{{ articles.category.first }}</span>
+                                        <a href="post-details.html"><h4>{{ articles.title }}</h4></a>
                                         <ul class="post-info">
                                             <li><a href="#">Admin</a></li>
                                             <li><a href="#">May 12, 2020</a></li>
@@ -187,16 +187,7 @@
                                     <div class="sidebar-heading">
                                         <h2>Recent Posts</h2>
                                     </div>
-                                    <div class="content">
-                                        <ul>
-                                            {% for item in recent_articles %}
-                                                <li><a href="post-details.html">
-                                                    <h5>{{ item.title }}</h5>
-                                                    <span>{{ item.pub_date }}</span>
-                                                </a></li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
+                                    {% include 'sidebar.html' %}
                                 </div>
                             </div>
                             <div class="col-lg-12">

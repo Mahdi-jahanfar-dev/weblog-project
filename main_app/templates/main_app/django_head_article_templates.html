@@ -1,20 +1,24 @@
-{% load static %}
-
-{% for i in article %}
-    <div class="item">
-        <img src="{{ i.image.url }}" alt="{{ i.Title }}">
-        <div class="item-content">
-            <div class="main-content">
-                <div class="meta-category">
-                    <span>{{ i.category.all.first.name }}</span>
+    <div class="main-banner header-text">
+        <div class="container-fluid">
+            <div class="owl-banner owl-carousel">
+                {% for item in article %}
+                    <div class="item">
+                    <img src="{{ item.image.url}}" alt="">
+                    <div class="item-content">
+                        <div class="main-content">
+                            <div class="meta-category">
+                                <span>F{{ item.category.first }}</span>
+                            </div>
+                            <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }}</h4></a>
+                            <ul class="post-info">
+                                <li><a href="#">{{ item.writer }}</a></li>
+                                <li><a href="#">{{ item.pub_date }}</a></li>
+                                <li><a href="#">12 Comments</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                    <a href="{{ i.get_absolute_url }}"><h4>{{ i.title }}</h4></a>
-                <ul class="post-info">
-                    <li><a href="#">{{ i.writer.username }}</a></li>
-                    <li><a href="#">{{ i.pub_date }}</a></li>
-                    <li><a href="#">12 Comments</a></li>
-                </ul>
+                {% endfor %}
             </div>
         </div>
     </div>
-{% endfor %}
