@@ -65,9 +65,7 @@ def edit_profile(request):
         if request.method == 'POST':
             father_name = request.POST["father_name"]
             melicode = request.POST["meli_code"]
-            image = request.POST["image"]
-
-            Profile.objects.create(user_id=1,father_name=father_name, national_code=melicode, image=image)
+            Profile.objects.create(user_id=1,father_name=father_name, national_code=melicode)
             return redirect(reverse('account_app:account'))
         else:
             return render(request, 'account_app/edit_profile.html')

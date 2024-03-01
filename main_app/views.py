@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from account_app.views import login_user
-from blog_app.models import Article
+from blog_app.models import Article, Category
 def index(request):
     articles = Article.objects.all()
     recent_articles = Article.objects.all().order_by('-pub_date')[:3]

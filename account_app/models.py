@@ -9,4 +9,4 @@ class Profile(models.Model):
     user = OneToOneField(User, on_delete=models.CASCADE)
     national_code = models.CharField(max_length=10)
     father_name = models.CharField(max_length=50)
-    image = models.FileField()
+    image = models.FileField(null=True, blank=True)

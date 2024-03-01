@@ -1,9 +1,44 @@
 {% extends 'base.html' %}
 {% load static %}
+
+<header class="">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><h2>Stand Blog<em>.</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'main_app:index' %}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog_app:article_list' %}">all posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="post-details.html">Post Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    {% include 'main_app/django_login_conditions.html' %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
 <!-- Page Content -->
 <!-- Banner Starts Here -->
 {% block content %}
-{% include 'main_app/django_head_article_templates.html' %}
+    {% include 'main_app/django_head_article_templates.html' %}
     <!-- Banner Ends Here -->
 
     <section class="blog-posts">
@@ -14,40 +49,40 @@
                         <div class="row">
                             {% for item in recent_art %}
                                 <div class="col-lg-12">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="{{ item.image.url}}" alt="">
-                                    </div>
-                                    <div class="down-content">
-                                        <span>Lifestyle</span>
-                                        <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }}</h4></a>
-                                        <ul class="post-info">
-                                            <li><a href="#">{{ item.writer }}</a></li>
-                                            <li><a href="#">{{ item.pub_date}}</a></li>
-                                            <li><a href="#">12 Comments</a></li>
-                                        </ul>
-                                        <p>{{ item.content }}</p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-tags"></i></li>
-                                                        <li><a href="#">Beauty</a>,</li>
-                                                        <li><a href="#">Nature</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-6">
-                                                    <ul class="post-share">
-                                                        <li><i class="fa fa-share-alt"></i></li>
-                                                        <li><a href="#">Facebook</a>,</li>
-                                                        <li><a href="#"> Twitter</a></li>
-                                                    </ul>
+                                    <div class="blog-post">
+                                        <div class="blog-thumb">
+                                            <img src="{{ item.image.url }}" alt="">
+                                        </div>
+                                        <div class="down-content">
+                                            <span>{{ item.category.first }}</span>
+                                            <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }}</h4></a>
+                                            <ul class="post-info">
+                                                <li><a href="#">{{ item.writer }}</a></li>
+                                                <li><a href="#">{{ item.pub_date }}</a></li>
+                                                <li><a href="#">12 Comments</a></li>
+                                            </ul>
+                                            <p>{{ item.content }}</p>
+                                            <div class="post-options">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-tags"></i></li>
+                                                            <li><a href="#">Beauty</a>,</li>
+                                                            <li><a href="#">Nature</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <ul class="post-share">
+                                                            <li><i class="fa fa-share-alt"></i></li>
+                                                            <li><a href="#">Facebook</a>,</li>
+                                                            <li><a href="#"> Twitter</a></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             {% endfor %}
                             <div class="col-lg-12">
                                 <div class="main-button">
@@ -60,61 +95,7 @@
                 <div class="col-lg-4">
                     <div class="sidebar">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="sidebar-item search">
-                                    <form id="search_form" name="gs" method="GET" action="#">
-                                        <input type="text" name="q" class="searchText" placeholder="type to search..."
-                                               autocomplete="on">
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="sidebar-item recent-posts">
-                                    <div class="sidebar-heading">
-                                        <h2>Recent Posts</h2>
-                                    </div>
-                                    <div class="content">
-                                        <ul>
-                                            {% include 'sidebar.html' %}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="sidebar-item categories">
-                                    <div class="sidebar-heading">
-                                        <h2>Categories</h2>
-                                    </div>
-                                    <div class="content">
-                                        <ul>
-                                            <li><a href="#">- Nature Lifestyle</a></li>
-                                            <li><a href="#">- Awesome Layouts</a></li>
-                                            <li><a href="#">- Creative Ideas</a></li>
-                                            <li><a href="#">- Responsive Templates</a></li>
-                                            <li><a href="#">- HTML5 / CSS3 Templates</a></li>
-                                            <li><a href="#">- Creative &amp; Unique</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="sidebar-item tags">
-                                    <div class="sidebar-heading">
-                                        <h2>Tag Clouds</h2>
-                                    </div>
-                                    <div class="content">
-                                        <ul>
-                                            <li><a href="#">Lifestyle</a></li>
-                                            <li><a href="#">Creative</a></li>
-                                            <li><a href="#">HTML5</a></li>
-                                            <li><a href="#">Inspiration</a></li>
-                                            <li><a href="#">Motivation</a></li>
-                                            <li><a href="#">PSD</a></li>
-                                            <li><a href="#">Responsive</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            {% include 'sidebar.html' %}
                         </div>
                     </div>
                 </div>
