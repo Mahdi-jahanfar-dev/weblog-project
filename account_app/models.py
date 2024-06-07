@@ -10,3 +10,12 @@ class Profile(models.Model):
     national_code = models.CharField(max_length=10)
     father_name = models.CharField(max_length=50)
     image = models.FileField(null=True, blank=True)
+
+    class Meta:
+        #for changing the name of this class in django admin panel we using this blow codes
+        verbose_name = 'پروفایل'
+        verbose_name_plural = 'پروفایل ها'
+
+
+    def __str__(self):
+        return self.user.username

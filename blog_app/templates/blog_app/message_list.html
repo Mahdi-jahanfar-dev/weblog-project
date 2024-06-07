@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for i in contactus_list %}
+        {{ i.title }} - {{ i.text }} - <a href="{% url 'blog_app:message_update' i.id %} " style="text-decoration: none; border: 1px black solid; background-color: blue; color: white; border-radius: 5px">Edit</a> - <a href="{% url 'blog_app:message_delete' i.id %}" style="text-decoration: none; border: 1px black solid; background-color: red; color: white; border-radius: 5px">DELETE</a>
+        <br>
+        <hr>
+    {% endfor %}
+</body>
+</html>
